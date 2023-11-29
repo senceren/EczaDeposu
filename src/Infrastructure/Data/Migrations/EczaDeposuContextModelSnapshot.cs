@@ -73,13 +73,16 @@ namespace Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PictureUri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -186,7 +189,8 @@ namespace Infrastructure.Data.Migrations
                                 .HasMaxLength(180)
                                 .HasColumnType("nvarchar(180)");
 
-                            b1.Property<string>("State")
+                            b1.Property<string>("District")
+                                .IsRequired()
                                 .HasMaxLength(180)
                                 .HasColumnType("nvarchar(180)");
 

@@ -23,7 +23,7 @@ namespace Infrastructure.Data.Config
                 ba.Property(a => a.City)
                 .HasMaxLength(180);
 
-                ba.Property(a => a.State)
+                ba.Property(a => a.District)
                 .HasMaxLength(180);
 
                 ba.Property(a => a.Country)

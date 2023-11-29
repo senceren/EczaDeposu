@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Web.Interfaces;
 using Web.Models;
 
@@ -50,6 +51,7 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Basket");
         }
 
+        [Authorize]
         public async Task<IActionResult> Checkout()
         {
             var basket = await _basketViewModelService.GetBasketViewModelAsync();
@@ -60,18 +62,21 @@ namespace Web.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Checkout(CheckoutViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                await _basketViewModelService.CheckoutAsync(vm.Street, vm.City, vm.State, vm.Country, vm.ZipCode);
+                await _basketViewModelService.CheckoutAsync(vm.Street, vm.City, vm.District, vm.Country, vm.ZipCode);
                 return RedirectToAction("OrderConfirmed");
             }
 
             vm.Basket = await _basketViewModelService.GetBasketViewModelAsync();
             return View(vm);
         }
+
+        [Authorize]
         public async Task<IActionResult> OrderConfirmed()
         {
             return View();

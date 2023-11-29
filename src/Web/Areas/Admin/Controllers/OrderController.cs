@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Web.Areas.Admin.Interfaces;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -7,9 +8,16 @@ namespace Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class OrderController : Controller
     {
-        public IActionResult Index()
+        private readonly IOrderViewModelService _orderViewModelService;
+
+        public OrderController(IOrderViewModelService orderViewModelService)
         {
-            return View();
+            _orderViewModelService = orderViewModelService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var orderViewModels = await _orderViewModelService.GetAllOrderAsync();
+            return View(orderViewModels);
         }
 
         public IActionResult OrderDetail()

@@ -9,10 +9,9 @@ namespace ApplicationCore.Entities
     public class Medicine : BaseEntity
     {
         public string Name { get; set; } = null!;
-        public string PictureUri { get; set; } = null!;
-
-        public string Description = null!;
+        public string? PictureUri { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; } = null!;
         public int Stock { get; set; }
     }
 }

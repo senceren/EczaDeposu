@@ -120,12 +120,19 @@ namespace Web.Areas.Identity.Pages.Account
 
                     var user = await _userManager.FindByEmailAsync(Input.Email);
 
-                    if(await _userManager.IsInRoleAsync(user,"Admin"))
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
+                    if (await _userManager.IsInRoleAsync(user, "Pharmacist"))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        return Page();
+                    }
 
-                    return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

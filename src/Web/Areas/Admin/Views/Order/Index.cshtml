@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<OrderViewModel>
+
+<h2>Sipariş Listesi</h2>
+
+<table class="table table-hover table-striped" id="datatablesSimple">
+    <thead>
+        <tr>
+            <th>Sipariş No</th>
+            <th>Müşteri Email</th>
+            <th>İlaç Adı</th>
+            <th>Adet</th>
+            <th>Fiyat</th>
+            <th>Sipariş Toplamı</th>
+            <th>Sipariş Tarihi</th>
+            <th>Sipariş Adresi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.UserEmail</td>
+                <td>@order.MedicineName</td>
+                <td>@order.Quantity</td>
+                <td>@order.UnitPrice</td>
+                <td>@order.TotalPrice</td>
+                <td>@order.OrderDate</td>
+                <td>@order.Street @order.ZipCode @order.District/@order.City, @order.Country </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

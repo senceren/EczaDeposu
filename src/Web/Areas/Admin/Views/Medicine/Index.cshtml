@@ -6,7 +6,10 @@
 @model List<ApplicationCore.Entities.Medicine>
 
 <div>
+    <div class="d-flex justify-content-between mb-4" >
     <h2>İlaç Listesi</h2>
+    <a asp-controller="Medicine" asp-action="AddMedicine" class="btn btn-success"><i class="fa-solid fa-plus"></i> Yeni İlaç Ekle</a>
+    </div>
     <table class="table table-hover table-striped" id="datatablesSimple">
         <thead>
             <tr>
@@ -28,11 +31,66 @@
                     <td>@medicine.Price</td>
                     <td>@medicine.Stock</td>
                     <td>
-                        <a href="#" class="btn btn-danger" data-delete-item="@medicine.Id"><i class="fa-solid fa-trash"></i></a>
-                        <a class="btn btn-success" asp-controller="Medicine" asp-action="UpdateMedicine" asp-route-medicineId="@medicine.Id"><i class="fa-solid fa-pen"></i></a>
+                        <a href="#" class="btn btn-danger" data-delete-item="@medicine.Id" id="openModalBtn"><i class="fa-solid fa-trash"></i></a>
+                        <a class="btn btn-primary" asp-controller="Medicine" asp-action="EditMedicine" asp-route-medicineId="@medicine.Id"><i class="fa-solid fa-pen"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="medicineModal" tabindex="-1" role="dialog" aria-labelledby="medicineModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="medicineModalLabel">Silme Onayı</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form asp-action="DeleteMedicine" method="post" id="frmDelete">
+                <input type="hidden" id="hdnMedicineId" name="medicineId" />
+                <div class="modal-body">
+                    <h6>İlacı silmek istediğinizden emin misiniz?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnDelete" class="btn btn-primary">Sil</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            // Projeyi silmek için modalı aç
+            $("[data-delete-item]").click(function () {
+                const medicineId = $(this).data("delete-item");
+                hdnMedicineId.value = medicineId;
+                $("#medicineModal").modal("show");
+            });
+
+            
+            $("#btnDelete").click(function () {
+                const medicineId = hdnMedicineId.value;
+
+                $.ajax({
+                    url: "/Medicine/DeleteMedicine",
+                    type: "POST",
+                    data: { medicineId: medicineId },
+                    success: function (result) {
+                        // Silme işlemi başarılı olduysa, modalı kapat
+                        $("#medicineModal").modal("hide");
+      
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+}

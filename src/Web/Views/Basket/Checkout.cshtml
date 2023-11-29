@@ -39,31 +39,27 @@
         <div class="row g-3">
             <div class="col-12">
                 <label asp-for="Street" class="form-label"></label>
-                <input asp-for="Street" type="text" class="form-control" placeholder="1234 Main St">
+                <input asp-for="Street" type="text" class="form-control" placeholder="A Mah B Sok 1/2">
                 <span asp-validation-for="Street" class="text-danger"></span>
-            </div>
-            <div class="col-12">
-                <label asp-for="City" class="form-label"></label>
-                <input asp-for="City" type="text" class="form-control" placeholder="City">
-                <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="col-md-5">
                 <label asp-for="Country" class="form-label"></label>
                 <select asp-for="Country" class="form-select">
-                    <option value="">Choose...</option>
-                    <option>Turkiye</option>
+                    <option value="">Seçiniz...</option>
+                    <option>Türkiye</option>
                     <option>United States</option>
                 </select>
                 <span asp-validation-for="Country" class="text-danger"></span>
             </div>
-            <div class="col-md-4">
-                <label asp-for="State" class="form-label"></label>
-                <select asp-for="State" class="form-select">
-                    <option value="">Choose...</option>
-                    <option>California</option>
-                    <option>Utah</option>
-                </select>
-                <span asp-validation-for="State" class="text-danger"></span>
+            <div class="col-12">
+                <label asp-for="City" class="form-label"></label>
+                <input asp-for="City" type="text" class="form-control" placeholder="İl">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="District" class="form-label"></label>
+                <input asp-for="District" type="text" class="form-control" placeholder="İlçe">
+                <span asp-validation-for="District" class="text-danger"></span>
             </div>
             <div class="col-md-3">
                 <label asp-for="ZipCode" class="form-label"></label>

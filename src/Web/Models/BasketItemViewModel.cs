@@ -9,6 +9,5 @@
         public int Quantity { get; set; }
         public string PictureUri { get; set; }
         public decimal TotalPrice => Quantity * UnitPrice;
-        public int Stock => Stock - Quantity;
     }
 }

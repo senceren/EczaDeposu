@@ -8,15 +8,19 @@ namespace Web.Models
         public BasketViewModel? Basket { get; set; } = null!;
 
         [Required, MaxLength(180)]
+        [DisplayName("Mahalle")]
         public string Street { get; set; } = null!;
 
         [Required, MaxLength(180)]
+        [DisplayName("İl")]
         public string City { get; set; } = null!;
 
         [MaxLength(60)]
-        public string? State { get; set; }
+        [DisplayName("İlçe")]
+        public string? District { get; set; }
 
         [Required, MaxLength(180)]
+        [DisplayName("Ülke")]
         public string Country { get; set; } = null!;
 
         [Required, MaxLength(180)]

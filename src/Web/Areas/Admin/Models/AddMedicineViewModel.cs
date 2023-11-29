@@ -12,7 +12,7 @@ namespace Web.Areas.Admin.Models
 
         [Required(ErrorMessage = "Bu alan zorunludur.")]
 
-        public string Description = null!;
+        public string Description { get; set; } = null!;
 
         [Required(ErrorMessage = "Bu alan zorunludur.")]
         public decimal Price { get; set; }

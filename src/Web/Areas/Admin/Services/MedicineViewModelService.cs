@@ -26,13 +26,14 @@ namespace Web.Areas.Admin.Services
 
             string ext = Path.GetExtension(medicine.Picture.FileName);
             string fileName = Path.Combine(Guid.NewGuid().ToString() + ext);
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicine", fileName);
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicines", fileName);
 
             using (var fileStream = File.Create(imagePath))
             {
                 medicine.Picture.CopyTo(fileStream);
             }
 
+            newMedicine.PictureUri = fileName;
             await _medicineService.AddMedicineAsycn(newMedicine);
         }
 
@@ -53,7 +54,7 @@ namespace Web.Areas.Admin.Services
 
             if (medicine.Picture != null)
             {
-                string oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicine", updatedMedicine.PictureUri);
+                string oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicines", updatedMedicine.PictureUri);
 
                 if (File.Exists(oldImagePath))
                 {
@@ -62,14 +63,15 @@ namespace Web.Areas.Admin.Services
 
                 string ext = Path.GetExtension(medicine.Picture.FileName);
                 string fileName = Path.Combine(Guid.NewGuid().ToString() + ext);
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicine", fileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/medicines", fileName);
 
                 using (var fileStream = File.Create(imagePath))
                 {
                     medicine.Picture.CopyTo(fileStream);
                 }
-
+                updatedMedicine.PictureUri = fileName;
             }
+
             await _medicineService.EditMedicineAsync(updatedMedicine);
 
         }

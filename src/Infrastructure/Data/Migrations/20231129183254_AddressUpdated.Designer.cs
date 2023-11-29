@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EczaDeposuContext))]
-    [Migration("20231128173936_BasketAdded")]
-    partial class BasketAdded
+    [Migration("20231129183254_AddressUpdated")]
+    partial class AddressUpdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,15 +76,20 @@ namespace Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PictureUri")
+                    b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PictureUri")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
@@ -102,6 +107,9 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -125,7 +133,8 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("MedicineName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
@@ -137,6 +146,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -165,12 +175,56 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Medicine");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Order", b =>
+                {
+                    b.OwnsOne("ApplicationCore.Entities.Address", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(180)
+                                .HasColumnType("nvarchar(180)");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(180)
+                                .HasColumnType("nvarchar(180)");
+
+                            b1.Property<string>("District")
+                                .IsRequired()
+                                .HasMaxLength(180)
+                                .HasColumnType("nvarchar(180)");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(180)
+                                .HasColumnType("nvarchar(180)");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(180)
+                                .HasColumnType("nvarchar(180)");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.Navigation("ShippingAddress")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.OrderItem", b =>
                 {
                     b.HasOne("ApplicationCore.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.Order", null)

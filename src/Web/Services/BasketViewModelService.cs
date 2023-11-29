@@ -53,13 +53,13 @@ namespace Web.Services
             return basket.ToBasketViewModel();
         }
 
-        public async Task CheckoutAsync(string street, string city, string? state, string country, string zip)
+        public async Task CheckoutAsync(string street, string city, string? district, string country, string zip)
         {
             Address shippingAddress = new Address()
             {
                 Street = street,
                 City = city,
-                State = state,
+                District = district,
                 Country = country,
                 ZipCode = zip
             };
