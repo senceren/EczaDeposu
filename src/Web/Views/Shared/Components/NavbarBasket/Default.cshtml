@@ -1,0 +1,15 @@
+﻿@model BasketViewModel
+
+<ul class="navbar nav me-3">
+    <li class="nav-item">
+        <a asp-controller="Basket" asp-action="Index">
+            <div class="basket">
+                <img src="~/img/basket.png" alt="Alternate Text" width="35" />
+                <div id="basket-items">
+                    @Model.TotalItems
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+

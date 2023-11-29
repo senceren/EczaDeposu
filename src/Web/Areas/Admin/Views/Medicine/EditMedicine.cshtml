@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "EditMedicine";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model Web.Areas.Admin.Models.UpdateMedicineViewModel
+<h1>İlaç Bilgileri Düzenle</h1>
+
+<form asp-action="EditMedicine" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id"  />
+    <div class="d-flex flex-column">
+        <div>
+            <label class="form-control" asp-for="Name">İsim:</label>
+            <input type="text" class="form-control" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label class="form-control" asp-for="Description">Açıklama:</label>
+            <textarea class="form-control" rows="4" asp-for="Description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div>
+            <label class="form-control" asp-for="Price">Fiyat:</label>
+            <input type="text" class="form-control" asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div>
+            <label class="form-control" asp-for="Stock">Stok:</label>
+            <input type="number" class="form-control" asp-for="Stock" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+        <div>
+            <label class="form-control" asp-for="Picture">Fotoğraf:</label>
+            <input type="file" class="form-control" asp-for="Picture" />
+            <span asp-validation-for="Picture" class="text-danger"></span>
+        </div>
+        <div class="d-flex">
+            <button class="btn btn-primary" type="submit">Kaydet</button>
+            <a class="btn btn-secondary" asp-controller="Medicine" asp-action="Index">İptal</a>
+        </div>
+    </div>
+</form>
+

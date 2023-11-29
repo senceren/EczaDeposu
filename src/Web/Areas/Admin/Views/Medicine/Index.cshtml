@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "İlaç Listesi";
+}
+
+@model List<ApplicationCore.Entities.Medicine>
+
+<div>
+    <h2>İlaç Listesi</h2>
+    <table class="table table-hover table-striped" id="datatablesSimple">
+        <thead>
+            <tr>
+                <th>Fotoğraf</th>
+                <th>Ad</th>
+                <th>Açıklama</th>
+                <th>Fiyat</th>
+                <th>Stok</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medicine in Model)
+            {
+                <tr>
+                    <td class="medicine-img"><img src="~/img/medicines/@medicine.PictureUri" alt="Alternate Text" width="100" /></td>
+                    <td>@medicine.Name</td>
+                    <td>@medicine.Description</td>
+                    <td>@medicine.Price</td>
+                    <td>@medicine.Stock</td>
+                    <td>
+                        <a href="#" class="btn btn-danger" data-delete-item="@medicine.Id"><i class="fa-solid fa-trash"></i></a>
+                        <a class="btn btn-success" asp-controller="Medicine" asp-action="UpdateMedicine" asp-route-medicineId="@medicine.Id"><i class="fa-solid fa-pen"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
