@@ -221,7 +221,7 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("ApplicationCore.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.Order", null)

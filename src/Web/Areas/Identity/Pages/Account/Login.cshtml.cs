@@ -124,14 +124,8 @@ namespace Web.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
-                    if (await _userManager.IsInRoleAsync(user, "Pharmacist"))
-                    {
-                        return LocalRedirect(returnUrl);
-                    }
-                    else
-                    {
-                        return Page();
-                    }
+
+                    return LocalRedirect(returnUrl);
 
                 }
                 if (result.RequiresTwoFactor)

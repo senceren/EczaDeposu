@@ -8,6 +8,7 @@ using Web.Services;
 using ApplicationCore.Services;
 using Web.Areas.Admin.Interfaces;
 using Web.Areas.Admin.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,8 +47,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthentication();
 
 app.UseAuthorization();
 

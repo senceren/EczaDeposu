@@ -6,10 +6,14 @@
 @model List<ApplicationCore.Entities.Medicine>
 
 <div>
-    <div class="d-flex justify-content-between mb-4" >
-    <h2>İlaç Listesi</h2>
-    <a asp-controller="Medicine" asp-action="AddMedicine" class="btn btn-success"><i class="fa-solid fa-plus"></i> Yeni İlaç Ekle</a>
+    <div class="d-flex justify-content-between mb-4">
+        <h2>İlaç Listesi</h2>
+        <a asp-controller="Medicine" asp-action="AddMedicine" class="btn btn-success"><i class="fa-solid fa-plus"></i> Yeni İlaç Ekle</a>
     </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
     <table class="table table-hover table-striped" id="datatablesSimple">
         <thead>
             <tr>
@@ -45,7 +49,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="medicineModalLabel">Silme Onayı</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <form asp-action="DeleteMedicine" method="post" id="frmDelete">
@@ -55,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btnDelete" class="btn btn-primary">Sil</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
                 </div>
             </form>
         </div>
@@ -73,7 +77,7 @@
                 $("#medicineModal").modal("show");
             });
 
-            
+
             $("#btnDelete").click(function () {
                 const medicineId = hdnMedicineId.value;
 
@@ -84,7 +88,7 @@
                     success: function (result) {
                         // Silme işlemi başarılı olduysa, modalı kapat
                         $("#medicineModal").modal("hide");
-      
+
                     },
                     error: function (error) {
                         console.log(error);

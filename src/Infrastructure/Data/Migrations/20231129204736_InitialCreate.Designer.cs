@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EczaDeposuContext))]
-    [Migration("20231129163841_InitialCreate")]
+    [Migration("20231129204736_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -192,7 +192,8 @@ namespace Infrastructure.Data.Migrations
                                 .HasMaxLength(180)
                                 .HasColumnType("nvarchar(180)");
 
-                            b1.Property<string>("State")
+                            b1.Property<string>("District")
+                                .IsRequired()
                                 .HasMaxLength(180)
                                 .HasColumnType("nvarchar(180)");
 
@@ -223,7 +224,7 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("ApplicationCore.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.Order", null)

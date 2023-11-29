@@ -49,10 +49,10 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShippingAddress_Street = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
-                    ShippingAddress_City = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
-                    ShippingAddress_State = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: true),
                     ShippingAddress_Country = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
+                    ShippingAddress_City = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
+                    ShippingAddress_District = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
+                    ShippingAddress_Street = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
                     ShippingAddress_ZipCode = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false)
                 },
                 constraints: table =>
@@ -107,8 +107,7 @@ namespace Infrastructure.Data.Migrations
                         name: "FK_OrderItems_Medicines_MedicineId",
                         column: x => x.MedicineId,
                         principalTable: "Medicines",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,

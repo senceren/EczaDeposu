@@ -32,6 +32,7 @@ namespace Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _medicineViewModelService.AddMedicineAsycn(vm);
+                TempData["Success"] = "Başarıyla eklendi.";
                 return RedirectToAction("Index");
             }
 
@@ -42,6 +43,7 @@ namespace Web.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteMedicine(int medicineId)
         {
             await _medicineViewModelService.DeleteMedicineAsync(medicineId);
+            TempData["Success"] = "Başarıyla silindi.";
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> EditMedicine(int medicineId)
@@ -65,6 +67,7 @@ namespace Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _medicineViewModelService.EditMedicineAsync(vm);
+                TempData["Success"] = "Başarıyla güncellendi.";
                 return RedirectToAction("Index");
             }
 
