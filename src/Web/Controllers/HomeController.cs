@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Web.ActionFilters;
 using Web.Interfaces;
 using Web.Models;
 
@@ -19,7 +18,6 @@ namespace Web.Controllers
             _homeViewModelService = homeViewModelService;
         }
 
-        [Authenticate]
         public async Task<IActionResult> Index()
         {
             var medicines = await _homeViewModelService.GetHomeViewModelAsync();
