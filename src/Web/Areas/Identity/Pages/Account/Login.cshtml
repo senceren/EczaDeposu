@@ -14,10 +14,12 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="user mb-3">
+                <i class="fa-solid fa-user" style="color: #004AAD"></i>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Kullanıcı Adı" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="user mb-3">
+                <i class="fa-solid fa-lock" style="color: #004AAD"></i>
                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Şifre" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
