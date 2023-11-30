@@ -21,7 +21,7 @@ namespace Web.Areas.Admin.Controllers
             return View(medicines);
         }
 
-        public IActionResult AddMedicine()
+        public async Task<IActionResult> AddMedicine()
         {
             return View();
         }

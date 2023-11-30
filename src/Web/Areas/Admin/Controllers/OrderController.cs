@@ -20,7 +20,7 @@ namespace Web.Areas.Admin.Controllers
             return View(orderViewModels);
         }
 
-        public IActionResult OrderDetail()
+        public async Task<IActionResult> OrderDetail()
         {
             return View();
         }

@@ -46,3 +46,11 @@ body {
     color:white;
 }
 
+.card>img{
+    padding:1rem;
+    transition:0.5s ease-in-out;
+}
+
+.card>img:hover{
+    transform:scale(1.1);
+}

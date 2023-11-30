@@ -23,7 +23,7 @@ namespace ApplicationCore.Services
         }
         public async Task<Basket> AddItemToBasketAsync(string buyerId, int medicineId, int quantity)
         {
-            var basket = await GetOrCreateBasketAsync(buyerId);
+            var basket = await GetOrCreateBasketAsync(buyerId);  
             var basketItem = basket.Items.FirstOrDefault(x => x.MedicineId == medicineId);
 
             if (basketItem != null)
@@ -41,7 +41,7 @@ namespace ApplicationCore.Services
                     Medicine = medicine
                 };
 
-                basket.Items.Add(basketItem);  // spset içine yeni bir sepet öğesi olarak ekle.
+                basket.Items.Add(basketItem);  // seset içine yeni bir sepet öğesi olarak ekle.
             }
 
             await _basketRepo.UpdateAsync(basket); // sepeti güncelle.
@@ -88,9 +88,9 @@ namespace ApplicationCore.Services
 
             foreach (var item in basket.Items)
             {
-                if (quantities.ContainsKey(item.MedicineId))
+                if (quantities.ContainsKey(item.MedicineId)) // Dictionary ile medicineId,quantity ikilisi tutuluyor.
                 {
-                    item.Quantity = quantities[item.MedicineId];
+                    item.Quantity = quantities[item.MedicineId]; // medicineId key'inin value değerinin atamasını yapar.
                     await _basketItemRepo.UpdateAsync(item);
                 }
             }
