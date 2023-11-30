@@ -14,8 +14,11 @@
         {
             <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
                 <div class="card">
-                    <img src="~/img/medicines/@item.PictureUri" class="card-img-top">
+                    <div class="img-fluid">
+                        <img src="~/img/medicines/@item.PictureUri" class="card-img-top">
+                    </div>
                     <div class="row card-body">
+                        <p>@item.Description</p>
                         <div class="col-8">
                             <h5 class="card-title" title="@item.Name">@item.Name</h5>
                             <p class="card-text">@item.Price ₺</p>
@@ -27,6 +30,58 @@
                 </div>
             </div>
         }
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            @if (Model.Pagination.HasPrevious)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-PageId="@(Model.Pagination.PageId - 1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item  disabled">
+                    <a class="page-link">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+
+            @foreach (var i in Model.Pagination.PageNumbers)
+            {
+                if (i == -1)
+                {
+                    <li class="page-item disabled"> <a class="page-link">&hellip;</a></li>
+                }
+                else
+                {
+
+                    <li class="page-item @(i == Model.Pagination.PageId ? "active" : "")"><a class="page-link" asp-route-PageId="@i">@i</a></li>
+                }
+            }
+
+            @if (Model.Pagination.HasNext)
+            {
+
+                <li class="page-item">
+                    <a class="page-link @(Model.Pagination.PageId > Model.Pagination.TotalPages ? "disabled" : "active")" asp-route-PageId="@(Model.Pagination.PageId + 1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link ">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
     </div>
 </section>
 
