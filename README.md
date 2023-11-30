@@ -5,14 +5,14 @@ Bu proje, eczacıların ilaç siparişlerini yönetebildiği ve adminlerin stokl
 ## Özellikler
 
 - **Eczacı Rolü:**
+  - Tüm ilaçları görüntüleyebilir.
   - İlaç siparişi verebilir.
-  - Sipariş geçmişini görüntüleyebilir.
   - Giriş Bilgileri:
     - Kullanıcı Adı: pharma@example.com
     - Şifre: P@ssword1
 
 - **Admin Rolü:**
-  - Siparişleri görüntüleyebilir ve yönetebilir.
+  - Siparişleri görüntüleyebilir.
   - İlaçları ekleyebilir, çıkarabilir ve düzenleyebilir.
   - Giriş Bilgileri:
     - Kullanıcı Adı: admin@example.com
